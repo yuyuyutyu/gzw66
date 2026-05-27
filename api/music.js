@@ -2,7 +2,7 @@
 // 这是你自定义的点歌接口，它调用你自己的 NeteaseCloudMusicApi
 
 // 你自己的 NeteaseCloudMusicApi 地址（替换为你刚部署的那个）
-const MY_MUSIC_API = 'https://gzw66-f7n9.vercel.app';
+const MY_MUSIC_API = 'https://api-enhanced-five-alpha.vercel.app';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
