@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/music.js": {
+      "runtime": "nodejs20.x",
+      "includeFiles": "src/**"
+    }
+  }
+}
