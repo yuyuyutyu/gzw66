@@ -52,7 +52,7 @@ export default async function handler(req, res) {
 
     // 4. 获取播放链接
     console.log('开始获取播放链接...');
-    const urlRes = await meting.url(song.url_id, 320);
+    const urlRes = await meting.url(song.url_id, id);
     const urlData = JSON.parse(urlRes);
     const musicUrl = urlData.url || '';
     console.log('播放链接:', musicUrl);
