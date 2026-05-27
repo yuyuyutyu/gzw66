@@ -14,7 +14,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "vercel-build": ""
+    "vercel-build": "",
     "dev": "rollup -c --watch",
     "prepublishOnly": "npm run build",
     "test": "npm run build && node test/test.js",
