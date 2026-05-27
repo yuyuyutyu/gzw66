@@ -1,7 +1,6 @@
 // api/music.js
-// 这是你自定义的点歌接口，它调用你自己的 NeteaseCloudMusicApi
+// 这是你自定义的点歌接口，它调用你自己的 NeteaseCloudMusicApiEnhanced
 
-// 你自己的 NeteaseCloudMusicApi 地址（替换为你刚部署的那个）
 const MY_MUSIC_API = 'https://api-enhanced-five-alpha.vercel.app';
 
 export default async function handler(req, res) {
@@ -16,7 +15,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 1. 调用你自己的 API 搜索歌曲
+    // 1. 搜索歌曲
     const searchUrl = `${MY_MUSIC_API}/search?keywords=${encodeURIComponent(songName)}&limit=1`;
     const searchRes = await fetch(searchUrl);
     const searchData = await searchRes.json();
@@ -32,19 +31,27 @@ export default async function handler(req, res) {
     const urlData = await urlRes.json();
     const musicUrl = urlData?.data?.[0]?.url || '';
 
-    // 3. 获取封面
+    // 3. 获取封面 - 优先使用专辑中的 picId 拼接
     let cover = '';
-    try {
-      const detailRes = await fetch(`${MY_MUSIC_API}/song/detail?ids=${song.id}`);
-      const detailData = await detailRes.json();
-      cover = detailData?.songs?.[0]?.al?.picUrl || '';
-    } catch (e) {}
+    if (song.album && song.album.picId) {
+      cover = `https://p3.music.126.net/${song.album.picId}.jpg`;
+    } else {
+      // 备用：调用 detail 接口
+      try {
+        const detailRes = await fetch(`${MY_MUSIC_API}/song/detail?ids=${song.id}`);
+        const detailData = await detailRes.json();
+        cover = detailData?.songs?.[0]?.al?.picUrl || '';
+      } catch (e) {}
+    }
 
-    // 4. 返回符合黄白助手格式的数据
+    // 4. 歌手 - 注意字段名是 artists 而不是 ar
+    const singer = song.artists?.map(a => a.name).join(',') || '';
+
+    // 5. 返回符合黄白助手格式的数据
     return res.status(200).json({
       code: 200,
       title: song.name,
-      singer: song.ar?.map(a => a.name).join(',') || '',
+      singer: singer,
       cover,
       link: `https://music.163.com/song?id=${song.id}`,
       music_url: musicUrl,
