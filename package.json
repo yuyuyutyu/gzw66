@@ -6,7 +6,6 @@
     "start": "node api/music.js"
   },
   "dependencies": {
-    // 恢复为官方原版
     "@meting/core": "^1.6.1"
   },
   "engines": {
