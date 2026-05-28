@@ -6,8 +6,8 @@
     "start": "node api/music.js"
   },
   "dependencies": {
-    "@metowolf/meting": "^2.0.0",
-    "node-fetch": "^3.3.2"
+    // 恢复为官方原版
+    "@meting/core": "^1.6.1"
   },
   "engines": {
     "node": "24.x"
