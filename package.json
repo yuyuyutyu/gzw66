@@ -63,6 +63,5 @@
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.49.0"
-    "@meting/core": "^1.6.1",
   }
 }
