@@ -1,7 +1,7 @@
 {
   "name": "netease-music-api",
   "version": "1.0.0",
-  "main": "api/music.js",
+  "private": true,
   "scripts": {
     "start": "node api/music.js"
   },
@@ -10,6 +10,6 @@
     "node-fetch": "^3.3.2"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   }
 }
